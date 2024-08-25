@@ -4,6 +4,8 @@
  */
 package com.gonzaloflorez.gonzalo.facturadeventa.infrastructure.in;
 
+import com.gonzaloflorez.gonzalo.config.FileSelector;
+
 /**
  *
  * @author camper
@@ -55,7 +57,9 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
         jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
         subirFacturaButton = new javax.swing.JButton();
+        SubirArchivo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
+        AreaTexto = new javax.swing.JTextArea();
 
         setPreferredSize(new java.awt.Dimension(804, 574));
         setLayout(new java.awt.BorderLayout());
@@ -123,6 +127,13 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
             }
         });
 
+        SubirArchivo.setText("Subir archivo");
+        SubirArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubirArchivoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -184,8 +195,10 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(subirFacturaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(266, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(SubirArchivo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(subirFacturaButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,9 +256,15 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
                     .addComponent(jLabel13)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(subirFacturaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(subirFacturaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SubirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        AreaTexto.setColumns(20);
+        AreaTexto.setRows(5);
+        jScrollPane2.setViewportView(AreaTexto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,8 +294,15 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_subirFacturaButtonActionPerformed
 
+    private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
+        FileSelector fileSelector = new FileSelector();
+        fileSelector.selectfile(AreaTexto);
+    }//GEN-LAST:event_SubirArchivoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaTexto;
+    private javax.swing.JButton SubirArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
