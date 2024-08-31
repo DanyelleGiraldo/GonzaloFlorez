@@ -5,7 +5,13 @@
 package com.gonzaloflorez.gonzalo.facturadeventa.infrastructure.in;
 
 import com.gonzaloflorez.gonzalo.config.FileSelector;
-
+import com.gonzaloflorez.gonzalo.facturadeventa.domain.entity.FacturaVenta;
+import com.gonzaloflorez.gonzalo.facturadeventa.domain.service.FacturaVentaRepository;
+import com.gonzaloflorez.gonzalo.facturadeventa.infrastructure.out.FacturaVentaMySQLRepository;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 /**
  *
  * @author camper
@@ -269,7 +275,38 @@ public class FacturaVentaCrear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void subirFacturaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirFacturaButtonActionPerformed
-        // TODO add your handling code here:
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fechaFact = null;
+        try {
+            String numVenta = numventatext.getText();
+            String fecha = fechatext.getText();
+            String empresa = empresatext.getText();
+            String direccion = direcciontext.getText();
+            String telefono = telefonotext.getText();
+            String codigoEntidad = entidadtext.getText();
+            String nit = nittext.getText();
+            
+            fechaFact = LocalDate.parse(fecha, formatter);
+            int valorProcedimiento = Integer.parseInt(procedimientotext.getText());
+            int valorDerechoSala = Integer.parseInt(salatext.getText());
+            int materialEInsumo = Integer.parseInt(insumotext.getText());
+            int valorLecturas = Integer.parseInt(lecturastext.getText());
+            int valorCopago = Integer.parseInt(copagotext.getText());
+            int valorFactura = Integer.parseInt(facturatext.getText());
+
+            FacturaVenta facturaVenta = new FacturaVenta(numVenta, fechaFact, empresa, direccion, telefono, codigoEntidad, nit, valorProcedimiento, valorDerechoSala, materialEInsumo, valorLecturas, valorCopago, valorFactura);
+            
+            FacturaVentaRepository facturaRepo = new FacturaVentaMySQLRepository();
+            facturaRepo.save(facturaVenta);
+
+            JOptionPane.showMessageDialog(null, "Factura guardada exitosamente!");
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Use el formato dd-MM-yyyy.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al convertir un valor numérico. Verifique los campos de entrada.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar la factura: " + e.getMessage());
+        }
     }//GEN-LAST:event_subirFacturaButtonActionPerformed
 
     private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
